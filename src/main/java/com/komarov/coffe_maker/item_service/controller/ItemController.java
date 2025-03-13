@@ -1,5 +1,6 @@
 package com.komarov.coffe_maker.item_service.controller;
 
+import com.komarov.coffe_maker.item_service.model.dto.ItemDTO;
 import com.komarov.coffe_maker.item_service.service.ItemService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,6 @@ public class ItemController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> getItemById(@PathVariable Long id){
-        return ResponseEntity.ok(itemService.findById(id));
+        return ResponseEntity.ok(new ItemDTO(itemService.findById(id)));
     }
 }

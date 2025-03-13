@@ -1,6 +1,7 @@
 package com.komarov.coffe_maker.item_service.service;
 
 import com.komarov.coffe_maker.item_service.model.Item;
+import com.komarov.coffe_maker.item_service.model.dto.ItemDTO;
 import com.komarov.coffe_maker.item_service.repository.ItemRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +19,19 @@ public class ItemService {
         return itemRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
-    public List<Item> findByCategoryId(Long id) {
-        return itemRepository.findAllByCategory_Id(id);
+    public List<ItemDTO> findByCategoryId(Long id) {
+        return itemRepository.findAllByCategory_Id(id).stream().map(ItemDTO::new).toList();
     }
 
-    public List<Item> findAll() {
-        return itemRepository.findAll();
+    public List<ItemDTO> findAll() {
+        return itemRepository.findAll().stream().map(ItemDTO::new).toList();
+    }
+
+    private ItemDTO convertToDTO(Item item){
+        return new ItemDTO(item);
+    }
+
+    private Item convertToEntity(ItemDTO item) {
+        return findById(item.id());
     }
 }

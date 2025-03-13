@@ -27,10 +27,6 @@ public class Item {
     private String imageUrl;
 
     @ManyToOne
-    @JoinColumn(name = "weight_id")
-    private Weight weight;
-
-    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 }
